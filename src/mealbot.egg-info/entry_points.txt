@@ -1,0 +1,2 @@
+[console_scripts]
+mealbot = mealbot.main:main

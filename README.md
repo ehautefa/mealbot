@@ -1,0 +1,102 @@
+# MealBot
+
+A Telegram bot that generates personalized weekly meal plans, produces optimized shopping lists, and automatically fills your cart on coop.ch for Click & Collect.
+
+## Features
+
+- Weekly meal plan generation using Claude AI
+- Seasonal Swiss ingredients
+- Nutritional balance (protein targets, carb limits)
+- Batch cooking optimization
+- Automated grocery list aggregation
+- Coop.ch cart automation via Playwright
+
+## Setup
+
+### Prerequisites
+
+- Python 3.12+
+- A Telegram bot token (from [@BotFather](https://t.me/BotFather))
+- An Anthropic API key
+- A Coop.ch account
+
+### Installation
+
+1. Clone the repository and navigate to the project directory:
+
+```bash
+cd mealbot
+```
+
+2. Create and activate a virtual environment:
+
+```bash
+python -m venv .venv
+source .venv/bin/activate  # On Windows: .venv\Scripts\activate
+```
+
+3. Install the package with development dependencies:
+
+```bash
+pip install -e ".[dev]"
+```
+
+4. Install Playwright browsers:
+
+```bash
+playwright install chromium
+```
+
+5. Configure environment variables:
+
+```bash
+cp .env.example .env
+# Edit .env with your credentials
+```
+
+## Running Tests
+
+```bash
+pytest
+```
+
+## Usage
+
+Start the bot:
+
+```bash
+mealbot
+```
+
+### Telegram Commands
+
+| Command | Description |
+|---------|-------------|
+| `/plan` | Generate and display the weekly meal plan |
+| `/swap [day] [meal]` | Replace a meal with an alternative |
+| `/courses` | Display the shopping list |
+| `/commander` | Start filling the Coop cart |
+| `/prefs` | Modify preferences |
+| `/prep` | Display Sunday batch cooking order |
+
+## Project Structure
+
+```
+mealbot/
+├── src/mealbot/
+│   ├── models.py          # Data models
+│   ├── config.py          # Settings & env vars
+│   ├── db/                # SQLite persistence
+│   ├── planner/           # Meal plan generation
+│   ├── grocery/           # Shopping list aggregation
+│   ├── coop/              # Coop.ch automation
+│   └── bot/               # Telegram handlers
+└── tests/
+    ├── unit/              # Unit tests
+    ├── integration/       # Integration tests
+    └── e2e/               # End-to-end tests
+```
+
+## License
+
+MIT
