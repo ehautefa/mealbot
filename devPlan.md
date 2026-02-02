@@ -181,37 +181,27 @@ pytest  # → 10 tests passent ✅
 
 ---
 
-### 🏃 Sprint 2 — Génération du Meal Plan via Claude (2-3 sessions)
+### 🏃 Sprint 2 — Génération du Meal Plan via Claude (2-3 sessions) ✅
 
 **Objectif** : Claude génère un plan de repas cohérent.
 
-#### Tests à écrire AVANT le code :
-
-```python
-# test_generator.py
-def test_generate_plan_returns_valid_structure(mock_claude):
-    """Le plan généré contient 7 jours × 3 repas."""
-
-def test_generate_plan_respects_constraints(mock_claude):
-    """Pas de lactose, pas d'œufs, max 1 repas viande/poisson par semaine."""
-
-def test_generate_plan_uses_seasonal_ingredients(mock_claude):
-    """En février, le plan ne propose pas de tomates fraîches."""
-
-def test_generate_plan_optimizes_batch_cooking(mock_claude):
-    """Les recettes batch servent pour plusieurs repas de la semaine."""
-
-def test_generate_plan_breakfast_is_portable(mock_claude):
-    """Le petit-déjeuner est transportable (chia pudding, overnight oats...)."""
-
-def test_generate_plan_dinner_is_quick_or_prepped(mock_claude):
-    """Le dîner prend <15min ou est déjà prêt du batch."""
-```
+#### Tests écrits (10 tests) :
+- Structure: 7 jours × 3 repas, recettes incluses
+- Contraintes: exclusions d'ingrédients, prompt validation
+- Saisonnier: pas de tomates en février, info saison dans prompt
+- Batch cooking: recettes réutilisées, ordre de préparation
+- Repas: petit-dej transportable, dîner rapide ou batch
 
 #### Implémentation :
-- `generator.py` : prompt structuré → Claude API → parsing JSON → MealPlan
-- Prompt engineering : contraintes, format de sortie attendu, exemples
-- Mock de l'API Claude pour les tests (réponses fixtures)
+- [x] `config.py` : Settings pydantic avec variables d'environnement
+- [x] `generator.py` : `MealPlanGenerator` classe avec prompt template
+- [x] `GeneratorConstraints` : dataclass pour les contraintes alimentaires
+- [x] Prompt template complet avec format JSON structuré
+- [x] Parsing de la réponse Claude → `MealPlan` + `Recipe[]`
+
+#### Apprentissages Sprint 2 :
+- Architecture mismatch possible avec packages binaires (pydantic-core, jiter) → réinstaller pour l'architecture correcte
+- Tests de fixtures doivent éviter les faux positifs (ex: "lait de coco" ≠ "lait")
 
 ---
 
