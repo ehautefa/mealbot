@@ -205,34 +205,24 @@ pytest  # → 10 tests passent ✅
 
 ---
 
-### 🏃 Sprint 3 — Agrégation courses (1-2 sessions)
+### 🏃 Sprint 3 — Agrégation courses (1-2 sessions) ✅
 
 **Objectif** : Transformer un MealPlan en liste de courses intelligente.
 
-#### Tests à écrire AVANT le code :
-
-```python
-# test_aggregator.py
-def test_aggregate_combines_same_ingredient():
-    """2 recettes avec 200g tofu chacune → 400g tofu sur la liste."""
-
-def test_aggregate_handles_unit_conversion():
-    """500ml lait de coco + 200ml lait de coco → 700ml."""
-
-def test_aggregate_excludes_pantry_staples():
-    """Sel, poivre, huile d'olive ne sont pas sur la liste (option configurable)."""
-
-def test_aggregate_groups_by_category():
-    """La liste est groupée : légumes, protéines, épicerie sèche, frais..."""
-
-# test_formatter.py
-def test_format_telegram_message():
-    """La liste est formatée proprement pour Telegram avec emojis et sections."""
-```
+#### Tests écrits (18 tests) :
+- `test_aggregator.py` : 10 tests (combinaison, portions, pantry, catégories)
+- `test_formatter.py` : 8 tests (Telegram markdown, emojis, sections)
 
 #### Implémentation :
-- `aggregator.py` : parcourt les recettes, fusionne les ingrédients identiques
-- `formatter.py` : formatage Telegram (Markdown, sections par rayon)
+- [x] `aggregator.py` : `aggregate_ingredients()`, `GroceryList`, `GroceryListItem`
+- [x] `formatter.py` : `format_grocery_list()`, `format_meal_plan()`
+- [x] `IngredientCategory` enum (légumes, fruits, protéines, épicerie, frais, surgelés, boissons)
+- [x] `PANTRY_STAPLES` set pour exclusion configurable
+- [x] Calcul par portion: `quantity * (portions / servings)`
+
+#### Apprentissages Sprint 3 :
+- Les portions dans MealSlot = nombre de portions consommées, pas la recette entière
+- Formule: `ingredient_qty * (slot.portions / recipe.servings)`
 
 ---
 
